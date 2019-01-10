@@ -5,4 +5,6 @@ Rails.application.routes.draw do
       resources :quizzes
     end
   end
+  
+  mount ActionCable.server => '/cable'
 end
