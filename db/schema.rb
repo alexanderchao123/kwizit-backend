@@ -46,16 +46,20 @@ ActiveRecord::Schema.define(version: 2019_01_08_175732) do
     t.bigint "creator_id"
     t.string "title"
     t.text "description"
+    t.boolean "public", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["creator_id"], name: "index_quizzes_on_creator_id"
   end
 
   create_table "rounds", force: :cascade do |t|
+    t.bigint "host_id"
     t.bigint "quiz_id"
     t.integer "pin"
+    t.boolean "complete", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["host_id"], name: "index_rounds_on_host_id"
     t.index ["quiz_id"], name: "index_rounds_on_quiz_id"
   end
 

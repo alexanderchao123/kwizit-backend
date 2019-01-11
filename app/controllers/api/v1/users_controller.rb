@@ -9,10 +9,7 @@ class Api::V1::UsersController < ApplicationController
     if user.save
       render json: user, status: 201
     else
-      render json: {
-        error: "No such user; check the submitted email address",
-        status: 400
-      }, status: 400
+      render json: {error: user.errors.full_messages}, status: 400
     end
   end
 

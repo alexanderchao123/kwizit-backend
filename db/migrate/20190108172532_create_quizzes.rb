@@ -4,6 +4,7 @@ class CreateQuizzes < ActiveRecord::Migration[5.2]
       t.references :creator
       t.string :title, unique: true
       t.text :description
+      t.boolean :public, default: true
       t.timestamps
     end
   end
