@@ -1,4 +1,5 @@
 class Api::V1::QuizzesController < ApplicationController
+  skip_before_action :authorized, only: [:index]
   def index
     quizzes = Quiz.all
     render json: quizzes, status: :accepted
