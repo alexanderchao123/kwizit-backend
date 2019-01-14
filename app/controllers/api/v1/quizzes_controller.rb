@@ -5,7 +5,12 @@ class Api::V1::QuizzesController < ApplicationController
   end
 
   def create
-    quiz = Quiz.new(quiz_params)
+    quiz = current_user.created_quizzes.new(quiz_params)
+    if quiz.save
+      render json: {quiz: quiz}, status: :created
+    else
+      render json: {error: quiz.errors.full_messages}, status: :not_acceptable
+    end
   end
 
   private
