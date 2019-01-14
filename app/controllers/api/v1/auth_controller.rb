@@ -12,7 +12,11 @@ class Api::V1::AuthController < ApplicationController
   end
 
   def show
-
+    if current_user
+      render json: {user: UserSerializer.new(current_user)}, status: :accepted
+    else
+      render json: {error: "Some Error"}, status: :unprocessable_entity
+    end
   end
 
   private
