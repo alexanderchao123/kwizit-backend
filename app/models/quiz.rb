@@ -5,4 +5,5 @@ class Quiz < ApplicationRecord
   has_many :rounds
   has_many :plays, through: :rounds
   has_many :users, through: :plays
+  accepts_nested_attributes_for :questions
 end

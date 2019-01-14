@@ -2,10 +2,11 @@ class Api::V1::QuizzesController < ApplicationController
   skip_before_action :authorized, only: [:index]
   def index
     quizzes = Quiz.all
-    render json: quizzes, status: :accepted
+    render json: {quizzes: quizzes}, status: :accepted
   end
 
   def create
+    require 'pry' ; binding.pry
     quiz = current_user.created_quizzes.new(quiz_params)
     if quiz.save
       render json: {quiz: quiz}, status: :created
@@ -16,6 +17,6 @@ class Api::V1::QuizzesController < ApplicationController
 
   private
     def quiz_params
-      params.require(:quiz).permit(:title, :description, questions_attributes: [])
+      params.require(:quiz).permit(:title, :description, questions_attributes: [:title, :difficulty])
     end
 end
