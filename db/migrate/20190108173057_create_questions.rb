@@ -4,6 +4,7 @@ class CreateQuestions < ActiveRecord::Migration[5.2]
       t.references :quiz
       t.string :title
       t.string :difficulty
+      t.integer :seconds
       t.timestamps
     end
   end
