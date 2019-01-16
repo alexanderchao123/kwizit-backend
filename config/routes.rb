@@ -4,7 +4,9 @@ Rails.application.routes.draw do
       post '/authenticate', to: "auth#create"
       get '/current_user', to: "auth#show"
       resources :users
-      resources :quizzes
+      resources :quizzes do
+        resources :rounds
+      end
     end
   end
 
