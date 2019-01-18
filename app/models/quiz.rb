@@ -3,7 +3,7 @@ class Quiz < ApplicationRecord
   has_many :questions
   has_many :choices, through: :questions
   has_many :rounds
-  has_many :plays, through: :rounds
-  has_many :users, through: :plays
+  has_many :turns, through: :rounds
+  has_many :users, through: :turns
   accepts_nested_attributes_for :questions
 end
