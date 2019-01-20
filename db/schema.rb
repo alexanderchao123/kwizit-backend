@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_08_175732) do
+ActiveRecord::Schema.define(version: 2019_01_18_005258) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,20 +24,11 @@ ActiveRecord::Schema.define(version: 2019_01_08_175732) do
     t.index ["question_id"], name: "index_choices_on_question_id"
   end
 
-  create_table "plays", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "round_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["round_id"], name: "index_plays_on_round_id"
-    t.index ["user_id"], name: "index_plays_on_user_id"
-  end
-
   create_table "questions", force: :cascade do |t|
     t.bigint "quiz_id"
     t.string "title"
     t.string "difficulty"
-    t.integer "time"
+    t.integer "time", default: 20000
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["quiz_id"], name: "index_questions_on_quiz_id"
@@ -62,6 +53,17 @@ ActiveRecord::Schema.define(version: 2019_01_08_175732) do
     t.datetime "updated_at", null: false
     t.index ["host_id"], name: "index_rounds_on_host_id"
     t.index ["quiz_id"], name: "index_rounds_on_quiz_id"
+  end
+
+  create_table "turns", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "round_id"
+    t.bigint "choice_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["choice_id"], name: "index_turns_on_choice_id"
+    t.index ["round_id"], name: "index_turns_on_round_id"
+    t.index ["user_id"], name: "index_turns_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

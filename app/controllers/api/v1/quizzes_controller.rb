@@ -1,5 +1,6 @@
 class Api::V1::QuizzesController < ApplicationController
   skip_before_action :authorized, only: [:index, :show]
+
   def index
     quizzes = Quiz.all
     render json: {quizzes: quizzes}, status: :accepted
@@ -15,7 +16,7 @@ class Api::V1::QuizzesController < ApplicationController
   end
 
   def show
-    quiz = Quiz.find_by(id: params[:id])
+    quiz = Quiz.where(id: params[:id]).as_json(include: {questions: {include: :choices}})
     if quiz
       render json: {quiz: quiz}, status: :accepted
     else
