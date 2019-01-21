@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       get '/current_user', to: "auth#show"
       get '/authenticate_round/:pin', to: "rounds#show"
       resources :users
+      resources :guests
       resources :quizzes do
         resources :rounds, except: [:show]
       end
