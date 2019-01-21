@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 2019_01_18_005258) do
   create_table "rounds", force: :cascade do |t|
     t.bigint "host_id"
     t.bigint "quiz_id"
-    t.integer "pin"
+    t.string "pin"
     t.boolean "complete", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -16,7 +16,7 @@ class Api::V1::QuizzesController < ApplicationController
   end
 
   def show
-    quiz = Quiz.where(id: params[:id]).as_json(include: {questions: {include: :choices}})
+    quiz = Quiz.find_by(id: params[:id]).as_json(include: {questions: {include: :choices}})
     if quiz
       render json: {quiz: quiz}, status: :accepted
     else

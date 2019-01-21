@@ -3,9 +3,10 @@ Rails.application.routes.draw do
     namespace :v1 do
       post '/authenticate', to: "auth#create"
       get '/current_user', to: "auth#show"
+      get '/authenticate_round/:pin', to: "rounds#show"
       resources :users
       resources :quizzes do
-        resources :rounds
+        resources :rounds, except: [:show]
       end
     end
   end
