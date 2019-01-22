@@ -8,7 +8,8 @@ class RoundsChannel < ApplicationCable::Channel
     # Any cleanup needed when channel is unsubscribed
   end
 
-  def speak(message)
-    ActionCable.server.broadcast("round_#{params[:round_pin]}", {message: "Welcome from round: #{params[:round_pin]}"})
+  def speak(data)
+    ActionCable.server.broadcast("round_#{params[:round_pin]}", {isQuestionDisplayed: true})
+    # ActionCable.server.broadcast("round_#{params[:round_pin]}", {message: "Welcome from round: #{params[:round_pin]}"})
   end
 end
