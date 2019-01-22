@@ -21,7 +21,7 @@ class Api::V1::RoundsController < ApplicationController
     if round && !round.complete
       render json: {round: round}, status: :accepted
     else
-      render json: {error: "Couldn't find it"}, status: :not_acceptable
+      render json: {error: "We didn't recognize that game PIN. Please check and try again."}, status: :not_acceptable
     end
   end
 

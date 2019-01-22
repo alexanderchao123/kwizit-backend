@@ -2,9 +2,9 @@ class Api::V1::GuestsController < ApplicationController
   skip_before_action :authorized, only: [:create]
 
   def create
-    require 'pry' ; binding.pry
     guest = Guest.new(guest_params)
     if guest.save
+      ActionCable.server.broadcast("round_063422", {guest: guest, message: "#{guest.nickname} just joined!"})
       render json: {guest: guest}, status: :created
     else
       render json: {error: guest.errors.full_messages}, status: :not_acceptable

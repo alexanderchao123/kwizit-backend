@@ -1,7 +1,7 @@
 class RoundsChannel < ApplicationCable::Channel
   def subscribed
-    stream_from "round_#{params[:round_id]}"
-    ActionCable.server.broadcast('rounds', {message: "Successfully Connected"})
+    stream_from "round_#{params[:round_pin]}"
+    ActionCable.server.broadcast("round_#{params[:round_pin]}", {message: "Successfully Connected"})
   end
 
   def unsubscribed
@@ -9,6 +9,6 @@ class RoundsChannel < ApplicationCable::Channel
   end
 
   def speak(message)
-    ActionCable.server.broadcast("round_#{params[:round_id]}", {message: "Welcome from round: #{params[:round_id]}"})
+    ActionCable.server.broadcast("round_#{params[:round_pin]}", {message: "Welcome from round: #{params[:round_pin]}"})
   end
 end
