@@ -4,7 +4,7 @@ class Api::V1::GuestsController < ApplicationController
   def create
     guest = Guest.new(guest_params)
     if guest.save
-      ActionCable.server.broadcast("round_063422", {guest: guest, message: "#{guest.nickname} just joined!"})
+      ActionCable.server.broadcast("round_#{params[:round_pin]}", {guest: guest, message: "#{guest.nickname} just joined!"})
       render json: {guest: guest}, status: :created
     else
       render json: {error: guest.errors.full_messages}, status: :not_acceptable

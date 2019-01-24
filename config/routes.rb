@@ -7,7 +7,9 @@ Rails.application.routes.draw do
       resources :users
       resources :guests
       resources :quizzes do
-        resources :rounds, except: [:show]
+        resources :rounds, except: [:show] do
+          resources :turns
+        end
       end
     end
   end

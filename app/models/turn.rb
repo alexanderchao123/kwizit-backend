@@ -1,5 +1,5 @@
 class Turn < ApplicationRecord
-  belongs_to :user
+  belongs_to :guest
   belongs_to :round
-  belongs_to :choice
+  belongs_to :question
 end
