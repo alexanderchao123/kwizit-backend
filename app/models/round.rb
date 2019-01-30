@@ -1,8 +1,10 @@
 class Round < ApplicationRecord
   belongs_to :host, class_name: "User", foreign_key: "host_id"
   belongs_to :quiz
-  has_many :turns
-  has_many :users, through: :turns
+  has_many :admissions
+  has_many :guests, through: :admissions
+  has_many :round_questions
+  has_many :decisions
 
   before_save :generate_pin
 

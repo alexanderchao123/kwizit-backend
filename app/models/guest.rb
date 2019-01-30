@@ -1,3 +1,3 @@
 class Guest < ApplicationRecord
-  has_many :turns
+  has_many :decisions
 end

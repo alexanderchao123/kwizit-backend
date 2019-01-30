@@ -1,4 +1,4 @@
-class TurnSerializer < ActiveModel::Serializer
+class DecisionSerializer < ActiveModel::Serializer
   attributes :id, :user_id, :round_id, :choice_id
   belongs_to :user
   belongs_to :round

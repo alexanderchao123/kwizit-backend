@@ -1,6 +1,6 @@
-class CreateTurns < ActiveRecord::Migration[5.2]
+class CreateDecisions < ActiveRecord::Migration[5.2]
   def change
-    create_table :turns do |t|
+    create_table :decisions do |t|
       t.references :guest
       t.references :round
       t.references :question

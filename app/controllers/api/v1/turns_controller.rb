@@ -1,4 +1,4 @@
-class Api::V1::TurnsController < ApplicationController
+class Api::V1::DecisionsController < ApplicationController
   skip_before_action :authorized, only: [:create]
 
   def create
@@ -6,7 +6,7 @@ class Api::V1::TurnsController < ApplicationController
   end
 
   private
-    def turn_params
-      params.require(:turn).permit(:guest_id, :round_id, :question_id)
+    def decision_params
+      params.require(:decision).permit(:guest_id, :round_id, :question_id)
     end
 end
