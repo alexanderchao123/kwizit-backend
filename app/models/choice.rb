@@ -1,4 +1,4 @@
 class Choice < ApplicationRecord
   belongs_to :question
-  has_many :turns
+  has_many :decisions
 end
