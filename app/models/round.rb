@@ -4,7 +4,6 @@ class Round < ApplicationRecord
   has_many :admissions
   has_many :guests, through: :admissions
   has_many :round_questions
-  has_many :decisions, through: :round_questions
 
   before_save :generate_pin
 
