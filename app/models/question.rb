@@ -5,4 +5,5 @@ class Question < ApplicationRecord
   accepts_nested_attributes_for :choices
 
   validates :title, presence: true
+  validates :difficulty, presence: true
 end
