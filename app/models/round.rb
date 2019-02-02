@@ -11,5 +11,4 @@ class Round < ApplicationRecord
     self.pin = SecureRandom.hex(3)
     generate_pin if Round.exists?(pin: self.pin)
   end
-
 end
