@@ -8,7 +8,7 @@ class Api::V1::RoundsController < ApplicationController
   end
 
   def create
-    round = current_user.hosted_rounds.new(quiz_id: params[:quiz_id])
+    round = current_user.rounds.new(quiz_id: params[:quiz_id])
     if round.save
       render json: {round: round}, status: :created
     else
