@@ -5,4 +5,5 @@ class Quiz < ApplicationRecord
   accepts_nested_attributes_for :questions
 
   validates :title, presence: true
+  validates :description, presence: true
 end
