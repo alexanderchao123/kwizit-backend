@@ -4,7 +4,7 @@ class CreateDecisions < ActiveRecord::Migration[5.2]
       t.references :guest
       t.references :round_question
       t.references :choice
-      t.boolean :correct
+      t.boolean :correct, default: false
       t.timestamps
     end
   end
