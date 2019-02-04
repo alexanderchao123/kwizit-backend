@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       resources :quizzes do
         resources :rounds, except: [:show] do
           resources :round_questions, only: [:index, :create, :show]
-          resources :turns
+          resources :decisions
         end
       end
     end
