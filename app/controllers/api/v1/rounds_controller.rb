@@ -26,6 +26,10 @@ class Api::V1::RoundsController < ApplicationController
     end
   end
 
+  def current_question
+    round = Round.find_by(pin: params[:pin])
+  end
+
   private
     def round_params
       params.require(:round).permit(:quiz_id)

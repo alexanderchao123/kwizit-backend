@@ -3,7 +3,6 @@ class RoundQuestionsController < ApplicationController
   end
 
   def create
-    # require 'pry' ; binding.pry
     round = Round.find_by(pin: round_question_params[:round_pin])
     # question = round.questions
   end
