@@ -27,10 +27,26 @@ class Api::V1::RoundsController < ApplicationController
   end
 
   def current_question
+    # find the round
+    # check if the round_questions length is equal to the quiz questions length
+    # check the round for unexpired round_question
+    # if the last round_question is expired render new question
+    # else render the unexpired round_question
+
     round = Round.find_by(pin: params[:pin])
     question = round.quiz.questions[round.round_questions.length]
-    round.round_questions.create(question: question, expiration: Time.now())
-    render json: {question: question}
+    if round.round_questions.length >= round.quiz.questions.length
+      render json: {question: question, last_question: true}
+    else
+      render json: {question: question, last_question: false}
+      round.round_questions.create(question: question, expiration: Time.now())
+    end
+
+
+    # round = Round.find_by(pin: params[:pin])
+    # question = round.quiz.questions[round.round_questions.length]
+    # round.round_questions.create(question: question, expiration: Time.now())
+    # render json: {question: question}
   end
 
   private
