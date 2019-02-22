@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 2019_01_30_192248) do
     t.bigint "guest_id"
     t.bigint "round_question_id"
     t.bigint "choice_id"
-    t.boolean "correct"
+    t.boolean "correct", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["choice_id"], name: "index_decisions_on_choice_id"
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 2019_01_30_192248) do
     t.bigint "quiz_id"
     t.string "title"
     t.string "difficulty"
-    t.integer "time", default: 20000
+    t.integer "time", default: 30
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["quiz_id"], name: "index_questions_on_quiz_id"

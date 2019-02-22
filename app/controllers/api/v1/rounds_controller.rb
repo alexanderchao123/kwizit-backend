@@ -1,5 +1,5 @@
 class Api::V1::RoundsController < ApplicationController
-  skip_before_action :authorized, only: [:index, :show]
+  skip_before_action :authorized, only: [:index]
 
   def index
     quiz = Quiz.find_by(id: params[:quiz_id])
@@ -28,6 +28,9 @@ class Api::V1::RoundsController < ApplicationController
 
   def current_question
     round = Round.find_by(pin: params[:pin])
+    question = round.quiz.questions[round.round_questions.length]
+    round.round_questions.create(question: question, expiration: Time.now())
+    render json: {question: question}
   end
 
   private

@@ -4,17 +4,11 @@ class Round < ApplicationRecord
   has_many :admissions
   has_many :guests, through: :admissions
   has_many :round_questions
-  has_many :questions, through: :round_questions
 
   before_save :generate_pin
 
   def generate_pin
     self.pin = SecureRandom.hex(3)
     generate_pin if Round.exists?(pin: self.pin)
-  end
-
-  def current_question
-    quest = self.quiz.questions - self.questions
-    self.round_questions.create(question: quest.first, expiration: Time.now())
   end
 end

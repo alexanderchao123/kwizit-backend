@@ -4,4 +4,8 @@ class RoundQuestion < ApplicationRecord
   has_many :decisions
 
   validates :expiration, presence: true
+
+  def is_expired?
+    self.expiration() > Time.now()
+  end
 end

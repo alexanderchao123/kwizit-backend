@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       resources :users
       resources :guests
       resources :quizzes do
-        resources :rounds, except: [:show] do
+        resources :rounds, only: [:index, :create] do
           resources :round_questions, only: [:index, :create, :show]
           resources :decisions
         end
