@@ -7,7 +7,7 @@ class Api::V1::QuizzesController < ApplicationController
   end
 
   def create
-    quiz = current_user.created_quizzes.new(quiz_params)
+    quiz = current_user.quizzes.new(quiz_params)
     if quiz.save
       render json: {quiz: quiz}, status: :created
     else

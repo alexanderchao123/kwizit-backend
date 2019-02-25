@@ -36,6 +36,7 @@ class Api::V1::RoundsController < ApplicationController
     round = Round.find_by(pin: params[:pin])
     question = round.quiz.questions[round.round_questions.length]
     if round.round_questions.length >= round.quiz.questions.length
+      question = {title: "", difficulty: "", time: 0}
       render json: {question: question, last_question: true}
     else
       render json: {question: question, last_question: false}
