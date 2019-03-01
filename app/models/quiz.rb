@@ -6,4 +6,8 @@ class Quiz < ApplicationRecord
 
   validates :title, presence: true
   validates :description, presence: true
+
+  def attributes
+    {id: id, creator_id: creator_id, title: title, description: description, public: public}
+  end
 end

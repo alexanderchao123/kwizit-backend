@@ -32,6 +32,7 @@ module KwizitBackend
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
+    # Loads local_env file to setup environment
     config.before_configuration do
       env_file = File.join(Rails.root, 'config', 'local_env.yml')
       YAML.load(File.open(env_file)).each do |key, value|

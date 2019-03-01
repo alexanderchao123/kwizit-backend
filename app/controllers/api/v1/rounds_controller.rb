@@ -1,5 +1,5 @@
 class Api::V1::RoundsController < ApplicationController
-  skip_before_action :authorized, only: [:index]
+  skip_before_action :authorized, only: [:index, :show]
 
   def index
     quiz = Quiz.find_by(id: params[:quiz_id])
@@ -19,7 +19,7 @@ class Api::V1::RoundsController < ApplicationController
   def show
     round = Round.find_by(pin: params[:pin])
     if round && !round.complete
-      round = round.as_json(include: {quiz: {include: :questions}})
+      round = round.as_json(:include => :quiz)
       render json: {round: round}, status: :accepted
     else
       render json: {error: "We didn't recognize that game PIN. Please check and try again."}, status: :not_acceptable

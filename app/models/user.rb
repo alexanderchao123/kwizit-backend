@@ -11,4 +11,8 @@ class User < ApplicationRecord
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
   validates :password, presence: true, length: { minimum: 6 }
+
+  def attributes
+    {id: id, first_name: first_name, last_name: last_name, email: email}
+  end
 end
