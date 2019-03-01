@@ -6,4 +6,8 @@ class Question < ApplicationRecord
 
   validates :title, presence: true
   validates :difficulty, presence: true
+
+  def attributes
+    {id: id, quiz_id: quiz_id, title: title, difficulty: difficulty, time: time}
+  end
 end

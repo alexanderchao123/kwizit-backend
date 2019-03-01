@@ -3,4 +3,8 @@ class Choice < ApplicationRecord
   has_many :decisions
 
   validates :answer, presence: true
+
+  def attributes
+    {id: id, question_id: question_id, answer: answer, correct: correct}
+  end
 end

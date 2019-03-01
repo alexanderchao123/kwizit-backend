@@ -7,12 +7,12 @@ class Round < ApplicationRecord
 
   before_save :generate_pin
 
+  def attributes
+    {id: id, host_id: host_id, quiz_id: quiz_id, pin: pin, complete: complete}
+  end
+
   def generate_pin
     self.pin = SecureRandom.hex(3)
     generate_pin if Round.exists?(pin: self.pin)
-  end
-
-  def attributes
-    {id: id, host_id: host_id, quiz_id: quiz_id, pin: pin, complete: complete}
   end
 end
