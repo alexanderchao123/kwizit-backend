@@ -3,6 +3,7 @@ class Quiz < ApplicationRecord
   has_many :questions
   has_many :rounds
   accepts_nested_attributes_for :questions
+  has_one_attached :image
 
   validates :title, presence: true
   validates :description, presence: true
