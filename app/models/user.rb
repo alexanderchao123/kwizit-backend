@@ -1,7 +1,7 @@
 class User < ApplicationRecord
+  has_one_attached :avatar
   has_many :quizzes, class_name: "Quiz", foreign_key: "creator_id"
   has_many :rounds, class_name: "Round", foreign_key: "host_id"
-  has_one_attached :avatar
   has_secure_password
 
   validates :first_name, presence: true
