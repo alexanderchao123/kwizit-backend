@@ -3,7 +3,7 @@ class Question < ApplicationRecord
   has_one_attached :image
   has_many :choices
   has_many :round_questions
-  accepts_nested_attributes_for :choices, reject_if: :all_blank
+  accepts_nested_attributes_for :choices, reject_if: lambda {|attributes| attributes[:answer].blank?}
 
   validates :title, presence: true
   validates :difficulty, presence: true
