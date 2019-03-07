@@ -8,6 +8,7 @@ class Api::V1::QuizzesController < ApplicationController
 
   def create
     quiz = current_user.quizzes.new(quiz_params)
+    require 'pry' ; binding.pry
     if quiz.save
       render json: {quiz: quiz}, status: :created
     else
