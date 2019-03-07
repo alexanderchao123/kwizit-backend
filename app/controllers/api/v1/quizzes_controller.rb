@@ -16,7 +16,7 @@ class Api::V1::QuizzesController < ApplicationController
   end
 
   def show
-    quiz = Quiz.find_by(id: params[:id]).as_json(include: {questions: {include: :choices}})
+    quiz = current_quiz.as_json(include: {questions: {include: :choices}})
     if quiz
       render json: {quiz: quiz}, status: :accepted
     else
@@ -27,5 +27,9 @@ class Api::V1::QuizzesController < ApplicationController
   private
     def quiz_params
       params.require(:quiz).permit(:title, :description, :cover, questions_attributes: [:title, :difficulty, choices_attributes: [:answer, :correct]])
+    end
+
+    def current_quiz
+      Quiz.find_by(id: params[:id])
     end
 end
