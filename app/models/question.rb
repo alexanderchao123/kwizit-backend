@@ -7,8 +7,13 @@ class Question < ApplicationRecord
 
   validates :title, presence: true
   validates :difficulty, presence: true
+  validate :require_two_choices
 
   def attributes
     {id: id, quiz_id: quiz_id, title: title, difficulty: difficulty, time: time}
+  end
+
+  def require_two_choices
+     errors.add(:base, "You must provide at least two choice") if choices.size < 2
   end
 end
