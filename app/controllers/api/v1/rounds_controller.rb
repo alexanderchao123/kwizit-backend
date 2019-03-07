@@ -42,12 +42,6 @@ class Api::V1::RoundsController < ApplicationController
       render json: {question: question.as_json(include: ["choices"]), last_question: false}
       round.round_questions.create(question: question, expiration: Time.now())
     end
-
-
-    # round = Round.find_by(pin: params[:pin])
-    # question = round.quiz.questions[round.round_questions.length]
-    # round.round_questions.create(question: question, expiration: Time.now())
-    # render json: {question: question}
   end
 
   private
