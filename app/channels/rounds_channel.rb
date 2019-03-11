@@ -11,11 +11,11 @@ class RoundsChannel < ApplicationCable::Channel
     # Any cleanup needed when channel is unsubscribed
   end
 
-  def start_round(data)
-    ActionCable.server.broadcast("round_#{params[:round_pin]}", {type: "Start Round"})
+  def render_choice_block
+    ActionCable.server.broadcast("round_#{params[:round_pin]}", {type: "Render Choice Block"})
   end
 
-  def render_player_result(data)
-    ActionCable.server.broadcast("round_#{params[:round_pin]}", {type: "Render Player Result"})
+  def render_choice_result
+    ActionCable.server.broadcast("round_#{params[:round_pin]}", {type: "Render Choice Result"})
   end
 end
