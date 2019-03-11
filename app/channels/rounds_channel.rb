@@ -14,4 +14,8 @@ class RoundsChannel < ApplicationCable::Channel
   def start_round(data)
     ActionCable.server.broadcast("round_#{params[:round_pin]}", {type: "Start Round"})
   end
+
+  def render_player_result(data)
+    ActionCable.server.broadcast("round_#{params[:round_pin]}", {type: "Render Player Result"})
+  end
 end
