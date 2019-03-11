@@ -4,7 +4,6 @@ class RoundQuestionsController < ApplicationController
 
   def create
     round = Round.find_by(pin: round_question_params[:round_pin])
-    # question = round.questions
   end
 
   def show
