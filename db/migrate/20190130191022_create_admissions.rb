@@ -3,6 +3,7 @@ class CreateAdmissions < ActiveRecord::Migration[5.2]
     create_table :admissions do |t|
       t.references :guest
       t.references :round
+      t.boolean :active, default: true
       t.timestamps
     end
   end
