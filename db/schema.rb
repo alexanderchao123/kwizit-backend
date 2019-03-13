@@ -37,12 +37,13 @@ ActiveRecord::Schema.define(version: 2019_02_28_041505) do
   end
 
   create_table "admissions", force: :cascade do |t|
-    t.bigint "guest_id"
+    t.bigint "user_id"
     t.bigint "round_id"
+    t.boolean "active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["guest_id"], name: "index_admissions_on_guest_id"
     t.index ["round_id"], name: "index_admissions_on_round_id"
+    t.index ["user_id"], name: "index_admissions_on_user_id"
   end
 
   create_table "choices", force: :cascade do |t|
@@ -55,21 +56,15 @@ ActiveRecord::Schema.define(version: 2019_02_28_041505) do
   end
 
   create_table "decisions", force: :cascade do |t|
-    t.bigint "guest_id"
+    t.bigint "user_id"
     t.bigint "round_question_id"
     t.bigint "choice_id"
     t.boolean "correct", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["choice_id"], name: "index_decisions_on_choice_id"
-    t.index ["guest_id"], name: "index_decisions_on_guest_id"
     t.index ["round_question_id"], name: "index_decisions_on_round_question_id"
-  end
-
-  create_table "guests", force: :cascade do |t|
-    t.string "nickname"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_decisions_on_user_id"
   end
 
   create_table "questions", force: :cascade do |t|
