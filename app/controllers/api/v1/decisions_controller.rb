@@ -3,6 +3,9 @@ class Api::V1::DecisionsController < ApplicationController
 
   def create
     require 'pry' ; binding.pry
+    # create a decision
+    # if it saves, broadcast action and render object
+    # else render error message
   end
 
   private
