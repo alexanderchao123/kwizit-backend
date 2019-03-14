@@ -18,4 +18,15 @@ class RoundsChannel < ApplicationCable::Channel
   def render_choice_result
     ActionCable.server.broadcast("round_#{params[:round_pin]}", {type: "Render Choice Result"})
   end
+
+  def submit_choice(data)
+    # find the round
+    # get current question
+    # check if the user already answered the question
+    # if the user already answered the question
+    # if the user hasn't answered the question, while the other players havent, send "Render Choice Sent"
+    # else if the user is the last player to answer the question, send "Render Choice Result"
+    round = Round.find_by(pin: params[:round_pin])
+    require 'pry' ; binding.pry
+  end
 end

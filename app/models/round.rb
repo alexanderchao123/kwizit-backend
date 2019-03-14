@@ -15,4 +15,11 @@ class Round < ApplicationRecord
     self.pin = SecureRandom.hex(3)
     generate_pin if Round.exists?(pin: self.pin)
   end
+
+  def current_question
+    # retrieve the questions in the quiz
+    # check if all the questions have been called [questions - (round_questions that are expired)]
+    # if there is currently an active round_question (not expired), return the associated question
+    # if there isn't an active round_question && there are still questions in the array, create a round question associated to the question then return the question
+  end
 end
