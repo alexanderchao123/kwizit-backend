@@ -10,6 +10,7 @@ class RoundsChannel < ApplicationCable::Channel
 
   def unsubscribed
     # Any cleanup needed when channel is unsubscribed
+
   end
 
   def render_choice_block
@@ -30,4 +31,9 @@ class RoundsChannel < ApplicationCable::Channel
     round = Round.find_by(pin: params[:round_pin])
     require 'pry' ; binding.pry
   end
+
+  private
+    def current_round
+      round = Round.find_by(pin: params[:round_pin])
+    end
 end
