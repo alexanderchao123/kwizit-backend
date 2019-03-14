@@ -1,16 +1,16 @@
 class RoundsChannel < ApplicationCable::Channel
   def subscribed
     stream_from "round_#{params[:round_pin]}"
-    admission = current_round.admissions.create(user: current_user)
+    # admission = current_round.admissions.find_or_create_by(user: current_user)
+    current_admission.update(active: true)
     if is_player?(current_round)
       ActionCable.server.broadcast("round_#{params[:round_pin]}", {type: "Player Connected", data: current_user})
     end
   end
 
   def unsubscribed
-    # require 'pry' ; binding.pry
-    admission = current_round.admissions.find_by(user: current_user)
-    admission.update(active: false)
+    # admission = current_round.admissions.find_by(user: current_user)
+    current_admission.update(active: false)
   end
 
   def render_choice_block
@@ -34,5 +34,9 @@ class RoundsChannel < ApplicationCable::Channel
   private
     def current_round
       round = Round.find_by(pin: params[:round_pin])
+    end
+
+    def current_admission
+      current_round.admissions.find_or_create_by(user: current_user)
     end
 end
