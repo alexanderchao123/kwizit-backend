@@ -1,16 +1,16 @@
 class RoundsChannel < ApplicationCable::Channel
   def subscribed
     stream_from "round_#{params[:round_pin]}"
-    round = Round.find_by(pin: params[:round_pin])
-    admission = round.admissions.create(user: current_user)
-    if is_player?(round)
+    admission = current_round.admissions.create(user: current_user)
+    if is_player?(current_round)
       ActionCable.server.broadcast("round_#{params[:round_pin]}", {type: "Player Connected", data: current_user})
     end
   end
 
   def unsubscribed
-    # Any cleanup needed when channel is unsubscribed
-
+    # require 'pry' ; binding.pry
+    admission = current_round.admissions.find_by(user: current_user)
+    admission.update(active: false)
   end
 
   def render_choice_block
@@ -29,7 +29,6 @@ class RoundsChannel < ApplicationCable::Channel
     # if the user hasn't answered the question, while the other players havent, send "Render Choice Sent"
     # else if the user is the last player to answer the question, send "Render Choice Result"
     round = Round.find_by(pin: params[:round_pin])
-    require 'pry' ; binding.pry
   end
 
   private
