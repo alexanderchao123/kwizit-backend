@@ -13,6 +13,10 @@ Rails.application.routes.draw do
           resources :decisions
         end
       end
+      # this is a test route for the admissions for a specific route
+      resources :rounds, param: :pin do
+        resources :admissions
+      end
     end
   end
 
