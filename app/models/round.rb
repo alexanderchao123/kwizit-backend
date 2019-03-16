@@ -17,11 +17,19 @@ class Round < ApplicationRecord
   end
 
   def current_question
-    # retrieve the questions in the quiz
-    # check if all the questions have been called [questions - (round_questions that are expired)]
-    # if all questions have been called, return nil
-    # if there is currently an active round_question (not expired), return the associated question
-    # if there isn't an active round_question && there are still questions in the array, create a round question associated to the question then return the question
-    questions = self.quiz.questions
+    active_round_question = self.round_questions.find { |round_question| round_question.active == true }
+    if active_round_question
+      return active_round_question.question
+    else
+      questions = self.quiz.questions
+      activated_round_questions = self.round_questions.select { |round_question| round_question.active == false }
+      if (questions.size - activated_round_questions.size) > 0
+        question = questions[activated_round_questions.size]
+        self.round_questions.create(question: question)
+        return question
+      else
+        return nil
+      end
+    end
   end
 end

@@ -6,17 +6,17 @@ Rails.application.routes.draw do
       get '/authenticate_round/:pin', to: "rounds#show"
       get '/rounds/:pin/current_question', to: "rounds#current_question"
       resources :users
-      resources :guests
+
       resources :quizzes do
-        resources :rounds, only: [:index, :create] do
-          resources :round_questions, only: [:index, :create, :show]
-          resources :decisions
-        end
+        resources :rounds, only: [:index, :create]
       end
-      # this is a test route for the admissions for a specific route
+
       resources :rounds, param: :pin do
         resources :admissions
+        resources :round_questions
+        resources :decisions
       end
+
     end
   end
 
