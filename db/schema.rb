@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 2019_02_28_041505) do
   create_table "admissions", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "round_id"
+    t.integer "score", default: 0
     t.boolean "active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -71,6 +72,7 @@ ActiveRecord::Schema.define(version: 2019_02_28_041505) do
     t.bigint "quiz_id"
     t.string "title"
     t.string "difficulty"
+    t.integer "points", default: 100
     t.integer "time", default: 30
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -90,7 +92,7 @@ ActiveRecord::Schema.define(version: 2019_02_28_041505) do
   create_table "round_questions", force: :cascade do |t|
     t.bigint "round_id"
     t.bigint "question_id"
-    t.datetime "expiration"
+    t.boolean "active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["question_id"], name: "index_round_questions_on_question_id"

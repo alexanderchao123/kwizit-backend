@@ -32,7 +32,6 @@ class Api::V1::RoundsController < ApplicationController
     # check the round for unexpired round_question
     # if the last round_question is expired render new question
     # else render the unexpired round_question
-
     round = Round.find_by(pin: params[:pin])
     question = round.quiz.questions[round.round_questions.length]
     if round.round_questions.length >= round.quiz.questions.length
@@ -40,7 +39,7 @@ class Api::V1::RoundsController < ApplicationController
       render json: {question: question, last_question: true}
     else
       render json: {question: question.as_json(include: ["choices"]), last_question: false}
-      round.round_questions.create(question: question, expiration: Time.now())
+      round.round_questions.create(question: question)
     end
   end
 
