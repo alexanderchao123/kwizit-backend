@@ -26,6 +26,13 @@ class Api::V1::RoundsController < ApplicationController
     end
   end
 
+  def count
+    questions = current_round.quiz.questions
+    round_questions = current_round.round_questions
+    count = questions.size - round_questions.size
+    render json: {count: count}
+  end
+
   private
     def round_params
       params.require(:round).permit(:quiz_id)

@@ -21,6 +21,10 @@ class RoundsChannel < ApplicationCable::Channel
     ActionCable.server.broadcast("round_#{params[:round_pin]}", {type: "Render Choice Result"})
   end
 
+  def render_ranking
+    ActionCable.server.broadcast("round_#{params[:round_pin]}", {type: "Render Ranking"})
+  end
+
   def submit_choice(data)
     # find the round
     # get current question

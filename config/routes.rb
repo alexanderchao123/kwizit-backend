@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       post '/authenticate_user', to: "authentication#create"
       get '/authenticate_token', to: "authentication#show"
       get '/authenticate_round/:pin', to: "rounds#show"
+      get '/rounds/:pin/count', to: "rounds#count"
       resources :users
 
       resources :quizzes do
@@ -11,11 +12,11 @@ Rails.application.routes.draw do
       end
 
       resources :rounds, param: :pin do
-        resources :admissions
-        resources :round_questions
+        resources :admissions, only: [:index]
+        resources :round_questions, only: [:index, :create, :update] do
+        end
         resources :decisions
       end
-
     end
   end
 
