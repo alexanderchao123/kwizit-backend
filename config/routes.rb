@@ -13,8 +13,7 @@ Rails.application.routes.draw do
 
       resources :rounds, param: :pin do
         resources :admissions, only: [:index]
-        resources :round_questions, only: [:index, :create, :update] do
-        end
+        resources :round_questions, only: [:index, :create, :update]
         resources :decisions
       end
     end

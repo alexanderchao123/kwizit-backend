@@ -7,8 +7,17 @@ class Quiz < ApplicationRecord
 
   validates :title, presence: true
   validates :description, presence: true
+  validate :require_one_question
 
   def attributes
     {id: id, creator_id: creator_id, title: title, description: description, public: public}
+  end
+
+  def has_one_question?
+    self.questions.size >= 1
+  end
+
+  def require_one_question
+    errors.add(:base, "You must provide at least two choice") unless has_one_question?()
   end
 end

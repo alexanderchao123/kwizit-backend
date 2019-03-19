@@ -12,6 +12,6 @@ class Api::V1::AdmissionsController < ApplicationController
     end
 
     def active_admissions
-      current_round.admissions.where(active: true).order(updated_at: :desc)
+      current_round.admissions.where(active: true).order(updated_at: :asc)
     end
 end

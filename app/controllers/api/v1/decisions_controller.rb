@@ -19,6 +19,10 @@ class Api::V1::DecisionsController < ApplicationController
     end
   end
 
+  def show
+    require 'pry' ; binding.pry
+  end
+
   private
     def decision_params
       params.require(:decision).permit(:choice)
