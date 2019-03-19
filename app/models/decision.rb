@@ -6,6 +6,6 @@ class Decision < ApplicationRecord
   # after_create_commit { DecisionBroadcastJob.perform_later self }
 
   def attributes
-    {id: id, guest_id: guest_id, round_question_id: round_question_id, choice_id: choice_id, correct: correct}
+    {id: id, user_id: user_id, round_question_id: round_question_id, choice_id: choice_id, correct: correct}
   end
 end

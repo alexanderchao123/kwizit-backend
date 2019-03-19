@@ -1,8 +1,8 @@
 class RoundsChannel < ApplicationCable::Channel
   def subscribed
     stream_from "round_#{params[:round_pin]}"
-    current_admission.update(active: true)
     if is_player?(current_round)
+      current_admission.update(active: true)
       ActionCable.server.broadcast("round_#{params[:round_pin]}", {type: "Player Connected", data: current_user})
     else
       ActionCable.server.broadcast("round_#{params[:round_pin]}", {type: "Host Connected", data: current_user})
@@ -10,7 +10,9 @@ class RoundsChannel < ApplicationCable::Channel
   end
 
   def unsubscribed
-    current_admission.update(active: false)
+    if is_player?(current_round)
+      current_admission.update(active: false)
+    end
   end
 
   def render_choice_block
@@ -23,15 +25,6 @@ class RoundsChannel < ApplicationCable::Channel
 
   def render_ranking
     ActionCable.server.broadcast("round_#{params[:round_pin]}", {type: "Render Ranking"})
-  end
-
-  def submit_choice(data)
-    # find the round
-    # get current question
-    # check if the user already answered the question
-    # if the user already answered the question
-    # if the user hasn't answered the question, while the other players havent, send "Render Choice Sent"
-    # else if the user is the last player to answer the question, send "Render Choice Result"
   end
 
   private
