@@ -17,9 +17,8 @@ class Api::V1::RoundsController < ApplicationController
   end
 
   def show
-    round = Round.find_by(pin: params[:pin])
-    if round && !round.complete
-      round = round.as_json(include: {quiz: {include: :questions}})
+    if current_round && !current_round.complete
+      round = current_round.as_json(include: {quiz: {include: :questions}})
       render json: {round: round}, status: :accepted
     else
       render json: {error: "We didn't recognize that game PIN. Please check and try again."}, status: :not_acceptable

@@ -18,6 +18,8 @@ class Api::V1::RoundQuestionsController < ApplicationController
         round_question = current_round.round_questions.create(question: question)
         render json: {round_question: round_question.as_json(include: {question: {include: :choices}})}
       else
+        # update current_round complete attribute to true
+        # current_round.update(complete: true)
         render json: {round_question: current_round.round_questions.new()}
       end
     end
