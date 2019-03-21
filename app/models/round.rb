@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Round < ApplicationRecord
-  belongs_to :host, class_name: "User", foreign_key: "host_id"
+  belongs_to :host, class_name: 'User', foreign_key: 'host_id'
   belongs_to :quiz
   has_many :questions, through: :quiz
   has_many :admissions
@@ -9,7 +11,7 @@ class Round < ApplicationRecord
   before_save :generate_pin
 
   def attributes
-    {id: id, host_id: host_id, quiz_id: quiz_id, pin: pin, complete: complete}
+    { id: id, host_id: host_id, quiz_id: quiz_id, pin: pin, complete: complete }
   end
 
   def generate_pin

@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 class RoundsChannel < ApplicationCable::Channel
   def subscribed
     stream_from "round_#{params[:round_pin]}"
     if is_player?(current_round)
       current_admission.update(active: true)
-      ActionCable.server.broadcast("round_#{params[:round_pin]}", {type: "Player Connected", data: current_user})
+      ActionCable.server.broadcast("round_#{params[:round_pin]}", { type: 'Player Connected', data: current_user })
     else
-      ActionCable.server.broadcast("round_#{params[:round_pin]}", {type: "Host Connected", data: current_user})
+      ActionCable.server.broadcast("round_#{params[:round_pin]}", { type: 'Host Connected', data: current_user })
     end
   end
 
@@ -16,18 +18,19 @@ class RoundsChannel < ApplicationCable::Channel
   end
 
   def render_choice_block
-    ActionCable.server.broadcast("round_#{params[:round_pin]}", {type: "Render Choice Block"})
+    ActionCable.server.broadcast("round_#{params[:round_pin]}", { type: 'Render Choice Block' })
   end
 
   def render_choice_result
-    ActionCable.server.broadcast("round_#{params[:round_pin]}", {type: "Render Choice Result"})
+    ActionCable.server.broadcast("round_#{params[:round_pin]}", { type: 'Render Choice Result' })
   end
 
   def render_ranking
-    ActionCable.server.broadcast("round_#{params[:round_pin]}", {type: "Render Ranking"})
+    ActionCable.server.broadcast("round_#{params[:round_pin]}", { type: 'Render Ranking' })
   end
 
   private
+
     def current_round
       Round.find_by(pin: params[:round_pin])
     end
