@@ -10,14 +10,14 @@ Rails.application.routes.draw do
       resources :users
 
       resources :quizzes do
-        resources :rounds, only: [:index, :create]
-        resources :questions, only: [:create, :update]
+        resources :rounds, only: %i[index create]
+        resources :questions, only: %i[create update]
       end
 
-      resources :rounds, only: [:update], param: :pin do
-        resources :admissions, only: [:index]
-        resources :round_questions, only: [:index, :create, :update]
-        resources :decisions, only: [:create, :show]
+      resources :rounds, only: %i[update], param: :pin do
+        resources :admissions, only: %i[index]
+        resources :round_questions, only: %i[index create update]
+        resources :decisions, only: %i[create show]
       end
     end
   end

@@ -2,9 +2,8 @@
 
 module Api
   module V1
-    # This controller handles authentication for the User model
     class AuthenticationController < ApplicationController
-      skip_before_action :authorized, only: [:create]
+      skip_before_action :authorized, only: %i[create]
 
       def create
         user = User.find_by(email: user_login_params[:email])

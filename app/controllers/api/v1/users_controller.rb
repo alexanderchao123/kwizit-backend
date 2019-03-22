@@ -2,9 +2,8 @@
 
 module Api
   module V1
-    # This controller handles the User model
     class UsersController < ApplicationController
-      skip_before_action :authorized, only: [:index, :create]
+      skip_before_action :authorized, only: %i[index create]
 
       def index
         users = User.all

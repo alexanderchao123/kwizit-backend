@@ -2,9 +2,8 @@
 
 module Api
   module V1
-    # This controller handles the Quiz model
     class QuizzesController < ApplicationController
-      skip_before_action :authorized, only: [:index, :show]
+      skip_before_action :authorized, only: %i[index show]
 
       def index
         quizzes = Quiz.all

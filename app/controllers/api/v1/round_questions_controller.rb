@@ -2,16 +2,15 @@
 
 module Api
   module V1
-    # This controller handles the RoundQuestion model
     class RoundQuestionsController < ApplicationController
-      skip_before_action :authorized, only: [:index, :create, :update]
+      skip_before_action :authorized, only: %i[index create update]
 
       def index
         render json: { round_questions: round_questions }
       end
 
       def create
-        if has_active_round_question?
+        if active_round_question_exists?
           render json: { round_question: active_round_question.as_json(include: { question: { include: :choices } }) }
         else
           if has_questions?
@@ -28,6 +27,12 @@ module Api
         render json: { round_question: round_question }
       end
 
+      # currently count is handled in RoundController
+      # def count
+      #   count = questions.size - round_questions.size
+      #   render json: { count: count }
+      # end
+
       private
 
       def current_round
@@ -42,7 +47,7 @@ module Api
         current_round.round_questions.find { |round_question| round_question.active == true }
       end
 
-      def has_active_round_question?
+      def active_round_question_exists?
         !!active_round_question
       end
 

@@ -2,11 +2,20 @@
 
 module Api
   module V1
-    # This controller handles the Decision model
     class DecisionsController < ApplicationController
-      skip_before_action :authorized, only: [:create]
+      skip_before_action :authorized, only: %i[create]
 
       def create
+        # if there is active_round_question and there is a decision associated with the current user, then return the decision
+        # if there is an active_round_question, but no decisions associated between the current user and the active_round_question
+        # then create one
+
+        # *** its breaking because the round_question gets deactivated
+        # decision = active_round_question.decisions.find_by(user: current_user)
+        # if active_round_question && decision
+        #   render json: { decision: decision }
+        # elsif active_round_question
+
         if active_round_question
           selection = params[:choice].to_i
           choice = active_round_question.question.choices[selection]
@@ -24,12 +33,9 @@ module Api
         end
       end
 
-      def show
-        require 'pry' ; binding.pry
-      end
-
       private
 
+      # This is currently not being used because of how the fetch request passes to the body structure
       def decision_params
         params.require(:decision).permit(:choice)
       end

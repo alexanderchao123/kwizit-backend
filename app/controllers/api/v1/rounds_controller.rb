@@ -2,9 +2,8 @@
 
 module Api
   module V1
-    # This controller handles the Round model
     class RoundsController < ApplicationController
-      skip_before_action :authorized, only: [:index, :show, :current_question]
+      skip_before_action :authorized, only: %i[index show]
 
       def index
         quiz = Quiz.find_by(id: params[:quiz_id])

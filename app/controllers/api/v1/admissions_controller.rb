@@ -2,9 +2,8 @@
 
 module Api
   module V1
-    # This controller handles the Admission model
     class AdmissionsController < ApplicationController
-      skip_before_action :authorized, only: [:index]
+      skip_before_action :authorized, only: %i[index]
 
       def index
         admissions = active_admissions.map { |admission| admission.as_json(include: :user) }

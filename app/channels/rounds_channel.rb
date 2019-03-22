@@ -18,15 +18,21 @@ class RoundsChannel < ApplicationCable::Channel
   end
 
   def render_choice_block
-    ActionCable.server.broadcast("round_#{params[:round_pin]}", { type: 'Render Choice Block' })
+    if is_host?(current_round)
+      ActionCable.server.broadcast("round_#{params[:round_pin]}", { type: 'Render Choice Block' })
+    end
   end
 
   def render_choice_result
-    ActionCable.server.broadcast("round_#{params[:round_pin]}", { type: 'Render Choice Result' })
+    if is_host?(current_round)
+      ActionCable.server.broadcast("round_#{params[:round_pin]}", { type: 'Render Choice Result' })
+    end
   end
 
   def render_ranking
-    ActionCable.server.broadcast("round_#{params[:round_pin]}", { type: 'Render Ranking' })
+    if is_host?(current_round)
+      ActionCable.server.broadcast("round_#{params[:round_pin]}", { type: 'Render Ranking' })
+    end
   end
 
   private
